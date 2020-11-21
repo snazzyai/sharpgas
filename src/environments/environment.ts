@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // enviromentURL: 'http://localhost/Publish/api/SharpCustomers'
+  enviromentURL: "http://sharpgasapi.somee.com/",
+  SignUpEndpoint: "api/SignUpCustomers",
+  LoginEndPoint: "api/LoginCustomers"
 };
 
 /*
@@ -14,3 +18,4 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+//'http://localhost/Publish/api/SharpCustomers'

@@ -1,0 +1,141 @@
+
+
+<div class="container-fluid main-container">
+  <div class="row">
+    <div class="col-md-6 image-gas">
+        <!-- <img class="image-gas" src="../../../../assets/img/cookinggas2.jpg" alt='cooking gas' /> -->
+    </div>
+    <div class="col-md-6 right-view">
+      <nav class="nav navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand mr-auto" href="#">
+          <img
+            src="../../../assets/img/sharpgasLogo.png"
+            alt="Logo"
+            class="logo"
+          />
+        </a>
+        <div class="navbar-nav">
+          <a
+            class="link-style"
+            [routerLink]="['/onboarding/landing-page']"
+            href="javascript:void(0)"
+            ><span class="pd-l-r"><i class="fa fa-home"></i></span>Home</a
+          >
+        </div>
+      </nav>
+
+      <div class="signup-content container-right">
+        <form
+        method="POST"
+        [formGroup]="form"
+        (ngSubmit)="submitForm(form)"
+        >
+          <!-- (ngSubmit)="SubmitForm(form)" -->
+          <div class="user-circle-view">
+            <h2></h2>
+            <i class="fa fa-user-circle user-circle" aria-hidden="true"></i>
+          </div>
+          <div class="text-welcome">Welcome</div>
+
+          <div class="form-group">
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              id="email"
+              placeholder="Email"
+              formControlName="emailAdd"
+            />
+            <i class="fa fa-envelope-o field-icon" aria-hidden="true"></i>
+            <div
+              class="small alert alert-danger color-grey"
+              *ngIf="emailAdd.touched && emailAdd.invalid"
+            >
+              <span *ngIf="!!emailAdd.errors.required"
+                >Email address is required</span
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <input
+              formControlName="passWord"
+              [type]="passwordType"
+              class="form-control"
+              name="password"
+              id="password"
+              placeholder="Password"
+            />
+            <span
+              *ngIf="showPassword"
+              (click)="hideShowPassword()"
+              toggle="#password"
+              class="fa fa-fw fa-eye field-icon"
+            ></span>
+            <span
+              *ngIf="!showPassword"
+              (click)="hideShowPassword()"
+              toggle="#password"
+              class="fa fa-fw fa-eye-slash field-icon"
+            ></span>
+            <div
+              class="small alert alert-danger color-grey"
+              *ngIf="passWord.touched && passWord.invalid"
+            >
+              <span *ngIf="!!passWord.errors.required"
+                >Password is required</span
+              >
+            </div>
+          </div>
+
+          <div class="form-group" id="back-grey">
+            <button
+              name="submit"
+              id="submit"
+              class="btn-submit form-submit"
+              [routerLink]="['/onboarding/dashboard/']"
+            >
+              Login
+              <i
+                class="fa fa-spinner fa-spin fs-22 float-r"
+                *ngIf="showLoader"
+              ></i>
+            </button>
+<!--
+            <a
+            [routerLink]="['/onboarding/dashboard/']"
+            class="sign-up-text"
+            href="#"
+          >
+            <span class="txt3">Login </span>
+          </a> -->
+
+
+
+          </div>
+          <div></div>
+          <div class="text-center">
+            <span class="txt1">
+              <a [routerLink]="'/onboarding/resetPassword'" class="sign-up-text" href="#">
+                Forgot your password?
+              </a>
+            </span>
+          </div>
+
+          <div class="text-center">
+            <span class="txt1">
+              Don’t have an account?
+              <a
+                [routerLink]="['/onboarding/sign-up']"
+                class="sign-up-text"
+                href="#"
+              >
+                <span class="txt3">Sign Up </span>
+              </a>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

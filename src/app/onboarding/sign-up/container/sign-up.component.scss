@@ -1,0 +1,102 @@
+// variables
+$base-color: #448081;
+
+.main-container {
+  padding: 2.5rem 3rem;
+}
+.label-agree-term {
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+}
+.form-title {
+  font-size: 35px;
+  text-align: center;
+  padding: 10px;
+}
+.term-service {
+  color: #555;
+}
+
+.loginhere {
+  text-align: center;
+  /* margin-top: 91px; */
+  padding: 10px;
+}
+
+.loginhere-link {
+  color: #007bff;
+  :hover {
+    text-decoration: underline;
+  }
+}
+.image-gas {
+  background: url("../../../../assets/img/cookinggas2.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 87vh;
+}
+.right-view {
+  background: linear-gradient(0deg, #ebedf5, rgba(235, 237, 245, 0));
+}
+.logo {
+  width: 80px;
+  height: 80px;
+}
+.form-submit {
+  border: 0;
+  width: 120px;
+  height: 40px;
+  margin: auto;
+}
+
+.field-icon {
+  float: right;
+  margin-right: 17px;
+  margin-top: -28px;
+  position: relative;
+  z-index: 2;
+  color: #555;
+}
+
+.form-group {
+  padding: 10px;
+}
+
+#logo-container {
+  padding: 10px;
+}
+
+.logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container-right {
+  padding: 2rem;
+  height: 87vh;
+  overflow-y: scroll;
+}
+
+#submit {
+  background-color: $base-color;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+@media only screen and (max-width: 767px) {
+  .image-gas {
+    display: none;
+  }
+}
+// }
+@media screen and (min-width: 768px) {
+  .image-gas {
+    background: url("../../../../assets/img/cookinggas2.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 87vh;
+  }
+}

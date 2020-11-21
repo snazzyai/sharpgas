@@ -1,0 +1,123 @@
+.text-user {
+  text-align: center;
+  font-size: 1rem;
+}
+.img-circle {
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  margin: 2rem 0;
+}
+.img-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.icon {
+  font-size: 20px;
+  padding: 5px;
+}
+
+.icon-view {
+  display: flex;
+  flex-direction: row;
+}
+.nav-item {
+  color: grey;
+}
+.icon-color-purple {
+  color: purple;
+}
+.icon-color-yellow {
+  color: yellow;
+}
+.icon-color-orange {
+  color: orange;
+}
+.icon-color-green {
+  color: rgb(146, 218, 63);
+}
+.nav-link {
+  span {
+    color: grey;
+    margin-top: 5px;
+  }
+}
+
+//@at-root
+.user-dropdown {
+  margin-right: 2rem;
+  .user-text {
+    color: grey;
+    font-size: 1rem;
+    padding: 0 5px;
+  }
+}
+.dropdown-logo {
+  color: grey;
+  margin: 0 5px;
+}
+
+.btn-user {
+  border: 0;
+}
+
+.text-user {
+  text-align: center;
+  font-size: 1rem;
+}
+.img-circle {
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  margin: 2rem 0;
+}
+.img-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.icon {
+  font-size: 20px;
+  padding: 5px;
+}
+
+.icon-view {
+  display: flex;
+  flex-direction: row;
+}
+.nav-item {
+  color: grey;
+}
+.icon-color-purple {
+  color: purple;
+}
+.icon-color-yellow {
+  color: yellow;
+}
+.icon-color-orange {
+  color: orange;
+}
+.icon-color-green {
+  color: rgb(146, 218, 63);
+}
+
+.logo-brand {
+  width: 5rem;
+  height: 4.5rem;
+  margin-bottom: 5px;
+  margin-left: 4rem;
+}
+.text-brand {
+}
+.nav-link {
+  span {
+    color: grey;
+    margin-top: 5px;
+  }
+}
+
+.navbar {
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+}

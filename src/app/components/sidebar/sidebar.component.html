@@ -1,0 +1,50 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="img-user">
+        <img class="img-circle" src="../../../../assets/img/default-avatar.png" />
+        <p class="text-user">Abdulsalam</p>
+      </div>
+
+      <div class="sidebar-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+
+                <i class="fas fa-dolly-flatbed icon icon-color-purple"></i>
+                <span style="margin-left: 12px">Orders</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink = "/onboarding/dashboard/buy-gas">
+              <i class="fas fa-burn icon"></i>
+              <span style="margin-left: 22px">Buy Gas</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/onboarding/dashboard/portfolio" >
+              <i class="fas fa-user icon icon-color-orange"></i>
+              <span style="margin-left: 20px">Porfolio</span>
+            </a>
+          </li>  <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fas fa-info-circle icon icon-color-yellow"></i>
+              <span style="margin-left: 18px">F.A.Q</span>
+            </a>
+          </li>  <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fas fa-headset icon icon-color-green"></i>
+              <span style="margin-left: 18px">Support</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Main Content -->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <ng-content></ng-content>
+    </main>
+  </div>
+</div>

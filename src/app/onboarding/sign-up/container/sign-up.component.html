@@ -1,0 +1,244 @@
+
+<div class="container-fluid main-container">
+  <div class="row">
+    <div class="col-md-6 image-gas">
+
+    </div>
+    <div class="col-md-6 container-right right-view">
+      <nav class="nav navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand mr-auto" href="#">
+          <img
+            src="../../../assets/img/sharpgasLogo.png"
+            alt="Logo"
+            class="logo"
+          />
+        </a>
+        <div class="navbar-nav">
+          <a
+            class="link-style"
+            [routerLink]="['/onboarding/landing-page']"
+            href="javascript:void(0)"
+            ><span class="pd-l-r"><i class="fa fa-home"></i></span>Home</a
+          >
+        </div>
+      </nav>
+      <div class="signup-content">
+        <form
+          method="POST"
+          id="signup-form"
+          class="signup-form"
+          [formGroup]="form"
+        >
+          <!-- (ngSubmit)="SubmitForm(form)" -->
+          <div class="form-title">Create your account</div>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              formControlName="firstName"
+              id="firstName"
+              placeholder="First Name"
+            />
+            <div
+              class="small alert alert-danger"
+              *ngIf="firstName.touched && firstName.invalid"
+            >
+              <span *ngIf="!!firstName.errors.required"
+                >First name is required</span
+              >
+              <span *ngIf="!!firstName.errors.pattern"
+                >Only alphabets are allowed</span
+              >
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              formControlName="lastName"
+              id="lastName"
+              placeholder="Last Name"
+            />
+            <div
+              class="small alert alert-danger"
+              *ngIf="lastName.touched && lastName.invalid"
+            >
+              <span *ngIf="!!lastName.errors.required"
+                >Last name is required</span
+              >
+              <span *ngIf="!!lastName.errors.pattern"
+                >Only alphabets are allowed</span
+              >
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              formControlName="emailAdd"
+              id="email"
+              placeholder="Your Email"
+            />
+            <div
+              class="small alert alert-danger"
+              *ngIf="emailAdd.touched && emailAdd.invalid"
+            >
+              <span *ngIf="!!emailAdd.errors.required"
+                >Email address is required</span
+              >
+              <span *ngIf="!!emailAdd.errors.email"
+                >Email address is invalid</span
+              >
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="number"
+              class="form-control"
+              name="mobileNumber"
+              formControlName="mobileNumber"
+              id="mobileNumber"
+              placeholder="Mobile Number"
+            />
+            <div
+              class="small alert alert-danger"
+              *ngIf="mobileNumber.touched && mobileNumber.invalid"
+            >
+              <span *ngIf="!!mobileNumber.errors.required"
+                >Mobile Number is required</span
+              >
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              [type]="passwordType"
+              class="form-control"
+              name="password"
+              formControlName="passWord"
+              id="password"
+              placeholder="Password"
+            />
+
+            <span
+              *ngIf="showPassword"
+              (click)="hideShowPassword()"
+              toggle="#password"
+              class="fa fa-fw fa-eye field-icon"
+            ></span>
+            <span
+              *ngIf="!showPassword"
+              (click)="hideShowPassword()"
+              toggle="#password"
+              class="fa fa-fw fa-eye-slash field-icon"
+            ></span>
+            <div
+              class="small alert alert-danger"
+              *ngIf="passWord.touched && passWord.invalid"
+            >
+              <span *ngIf="!!passWord.errors.hasLower"
+                >Password must contain lower class</span
+              ><br />
+              <span *ngIf="!!passWord.errors.hasUpper"
+                >Password must contain upper class</span
+              ><br />
+              <span *ngIf="!!passWord.errors.hasNumber"
+                >Password must contain a number</span
+              ><br />
+              <span *ngIf="!!passWord.errors.valueLength"
+                >Password length must be greater than 8</span
+              ><br />
+              <span *ngIf="!!passWord.errors.required"
+                >Password is required</span
+              ><br />
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              [type]="rePasswordType"
+              class="form-control"
+              name="re_password"
+              id="re_password"
+              formControlName="re_password"
+              placeholder="Confirm your password"
+            />
+
+            <span
+              *ngIf="showRePassword"
+              (click)="hideShowRePassword()"
+              toggle="#password"
+              class="fa fa-fw fa-eye field-icon"
+            ></span>
+            <span
+              *ngIf="!showRePassword"
+              (click)="hideShowRePassword()"
+              toggle="#password"
+              class="fa fa-fw fa-eye-slash field-icon"
+            ></span>
+            <div
+              class="small alert alert-danger"
+              *ngIf="
+                form.hasError('notSame') ||
+                (re_password.touched && re_password.invalid)
+              "
+            >
+              <span>Password does not match</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input
+                type="checkbox"
+                name="agreeTerm"
+                class="form-check-input"
+                formControlName="agreeTerm"
+              />
+              <label for="agreeTerm" class="label-agree-term"
+                ><span><span></span></span>I agree
+                <a href="#" class="term-service">Terms of Conditions</a></label
+              >
+              <div
+                class="small alert alert-success back-grey"
+                *ngIf="agreeTerm.touched || agreeTerm.invalid"
+              >
+                <span *ngIf="form.hasError('required', 'agreeTerm')"
+                  >Kindly agree to terms and conditions</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <button
+              type="submit"
+              name="submit"
+              id="submit"
+              [disabled]="!disableButton"
+              class="form-submit"
+              value="Sign up"
+              [disabled]="!disableButton"
+            >
+              Sign up
+              <i
+                class="fa fa-spinner fa-spin fs-22 float-r"
+                *ngIf="showLoader"
+              ></i>
+            </button>
+          </div>
+        </form>
+        <p class="loginhere">
+          Already have an account?
+          <a [routerLink]="['/onboarding/login']" class="txt3 loginhere-link"
+            >Login here</a
+          >
+        </p>
+        <!-- test -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JS -->
+<!-- <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="js/main.js"></script> -->
