@@ -96,6 +96,7 @@ export class LoginComponent implements OnInit {
 
     if (userToken !== null){
       this.login(request);
+      this.showLoader = false;
     }
     else{
       this.authentication.Authenticate(request).subscribe(
