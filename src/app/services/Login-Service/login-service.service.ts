@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { environment } from "./../../../environments/environment.prod";
+import { environment } from "./../../../environments/environment";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import {
   LoginResponse,
@@ -11,7 +11,7 @@ import { Observable } from "rxjs";
 
 const httpOptions = {
   headers: new HttpHeaders({
-    "Content-Type": "application/json; charset=utf-8"
+    "Content-Type": "application/json; charset=utf-8",
   })
 };
 @Injectable({
@@ -38,30 +38,9 @@ export class LoginServiceService {
     return user != null;
   }
 
-  storeUser(
-    customerId,
-    firstName,
-    lastName,
-    userName,
-    mobileNumber,
-    email,
-    country,
-    addressOne,
-    addressTwo
-  ) {
-    localStorage.setItem(
-      "user",
-      JSON.stringify({
-        customerId,
-        firstName,
-        lastName,
-        userName,
-        mobileNumber,
-        email,
-        country,
-        addressOne,
-        addressTwo
-      })
-    );
+  storeUser(){
+
   }
+
+
 }

@@ -18,12 +18,6 @@ export class SignUpServiceService {
   constructor(private http: HttpClient) {}
 
   SubmitSignUpForm(request: SignUpRequest): Observable<SignUpResponse> {
-    console.log(
-      "request from service" +
-        JSON.stringify(request) +
-        "headers " +
-        JSON.stringify(httpOptions)
-    );
     return this.http
       .post<SignUpResponse>(
         environment.enviromentURL + environment.SignUpEndpoint,

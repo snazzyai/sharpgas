@@ -2,3 +2,7 @@ Day: 25/10/2020
 Tasks:
 1. Login and Signup functionality using services
 2. Route to Dashboard
+Day: 24/10/2020
+Tasks:
+1. Encrypt signup data
+2. Send POST data

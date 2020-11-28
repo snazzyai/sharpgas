@@ -6,8 +6,11 @@ export const environment = {
   production: false,
   // enviromentURL: 'http://localhost/Publish/api/SharpCustomers'
   enviromentURL: "http://sharpgasapi.somee.com/",
-  SignUpEndpoint: "api/SignUpCustomers",
-  LoginEndPoint: "api/LoginCustomers"
+  SignUpEndpoint: "api/Onboarding/SignUp",
+  LoginEndPoint: "api/Onboarding/Login",
+  authenticationEndPoint: "api/Authentication",
+  encryptionKey: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAz1ezMJHF2YVZ6QL0c+8Kzm/UsUVWhqMaFdOxo/NtMC+wAlVpiuUUDBBIRtdZxekSghir0u7RTeBaXcOKNbNGTeo9kNybgEpz6V5p6rvRfD+RNybmUYQEY0wNJbEtwxvqmp+7D8wBdGWouHW2jggDHXSaBOaYzOOZ0A5+L6avRwaA5LMOIGVhthxn9EVgGynax46zit3rZlA5qegbjZMLYhkpsr6HSmyrk61nkBeMPdE41NOOPT+AwepR2AFZ/+Hg2lDBxAlRmXSK7ew+P5cvs86PzMM5GkXMnJAJfeEdtAtCPohMU30C3PIoDcvqs9BkhUKOyGmMzQCuroRCW7BeiQIDAQAB",
+
 };
 
 /*

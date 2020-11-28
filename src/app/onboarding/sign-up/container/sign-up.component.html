@@ -28,6 +28,7 @@
           id="signup-form"
           class="signup-form"
           [formGroup]="form"
+          (ngSubmit)="submitForm(form)"
         >
           <!-- (ngSubmit)="SubmitForm(form)" -->
           <div class="form-title">Create your account</div>

@@ -1,5 +1,6 @@
 import { Router } from '@angular/router';
 import { SignUpServiceService } from '../../../services/Sign-up-Service/sign-up-service.service';
+import { EncryptionService } from '../../../services/Encryption/encryption.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PasswordValidator } from 'src/app/Utilities/CustomValidators';
@@ -23,10 +24,12 @@ export class SignUpComponent implements OnInit {
   disableButton: boolean = true;
   showerror: boolean = false;
   form: FormGroup;
+
   constructor(
     private service: SignUpServiceService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private encryption: EncryptionService
   ) {}
 
   ngOnInit() {
@@ -112,27 +115,31 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-  SubmitForm(request: SignUpRequest) {
+  submitForm(request: any) {
     if (this.form.invalid) {
       PasswordValidator.validateAllFormFields(this.form);
       return;
     }
 
+    // encrypt signup data
+
+
     this.showLoader = true;
     this.disableButton = false;
     request = {
-      firstname: this.form.value.firstName,
-      lastName: this.form.value.lastName,
-      email: this.form.value.emailAdd,
-      mobileNumber: this.form.value.mobileNumber,
-      password: this.form.value.passWord,
+      firstname: this.encryption.encrypt2(this.form.value.firstName),
+      lastName: this.encryption.encrypt2(this.form.value.lastName),
+      email: this.encryption.encrypt2(this.form.value.emailAdd),
+      mobileNumber: this.encryption.encrypt2(this.form.value.mobileNumber),
+      password: this.encryption.encrypt2(this.form.value.passWord),
     };
 
     console.log(request);
+
     return this.service.SubmitSignUpForm(request).subscribe(
       (response) => {
         this.responseSignUP = response;
-        if (this.responseSignUP.status == 200) {
+        if (this.responseSignUP.status === 200) {
           this.toastr.success(this.responseSignUP.description, 'Success!', {
             positionClass: 'toast-bottom-right',
           });

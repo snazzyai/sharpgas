@@ -6,6 +6,9 @@ import { PasswordValidator } from 'src/app/Utilities/CustomValidators';
 import { LoginServiceService } from '../../../services/Login-Service/login-service.service';
 import { LoginRequest, LoginResponse } from '../../../Utilities/APIFramework';
 import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
+import { EncryptionService } from '../../../services/Encryption/encryption.service';
+import {AuthenticationService} from '../../../services/Authentication/authentication.service';
+
 
 @Component({
   selector: 'app-login',
@@ -27,7 +30,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     private service: LoginServiceService,
-    private router: Router
+    private router: Router,
+    private encryption: EncryptionService,
+    private authentication: AuthenticationService
   ) {}
 
   ngOnInit() {
@@ -46,6 +51,8 @@ export class LoginComponent implements OnInit {
     return this.form.get('passWord');
   }
 
+
+
   hideShowPassword() {
     if (this.showPassword) {
       this.showPassword = false;
@@ -56,63 +63,83 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  submitForm(request) {
-    console.log('working');
+
+
+
+  submitForm(request: any) {
+
     if (this.form.invalid) {
       PasswordValidator.validateAllFormFields(this.form);
       return;
     }
+    // encrypt user details
+
     request = {
-      email: this.form.value.emailAdd,
-      password: this.form.value.passWord,
+      username: this.encryption.encrypt2("john.doe"),
+      password: this.encryption.encrypt2("john.password")
     };
-    console.log(JSON.stringify(request));
+
+    console.log(request);
     this.showLoader = true;
 
-    this.service.submitLoginForm(request).subscribe(
+    // this.authentication.Authenticate(request).subscribe(
+    //   (response) => {
+    //     this.showLoader = false;
+    //     console.log('authentication response', response);
+    //   }
+    // );
+
+    this.authentication.Authenticate(request).subscribe(
       (response) => {
-        console.log('response gotten')
-        this.loginResponse = response;
-        if (this.loginResponse.status === 200) {
-          const user = this.loginResponse.CustomerDetails[0];
-          this.showLoader = false;
-          // stores user data in localstorage
-          this.service.storeUser(
-            user.CustomerID,
-            user.FirstName,
-            user.LastName,
-            user.Username,
-            user.MobileNumber,
-            user.EmailAddress,
-            user.Country,
-            user.Address_1,
-            user.Address_2
-          );
-          this.router.navigate(['/portal/dashboard']);
-          this.toastr.success(this.loginResponse.description, 'Success!');
-        } else {
-          console.log('error')
-          this.toastr.error(this.loginResponse.description, 'Failed!');
-          this.showLoader = false;
-        }
-      },
-      (error: Response) => {
-        if (error.status === 404) {
-          this.toastr.error(
-            'An error occured : please contact support@sharpgas.com',
-            'Failed!',
-          );
-          console.log("error1", error);
-          this.showLoader = false;
-        } else {
-          this.toastr.success(
-            'An error occured : please contact support@sharpgas.com',
-            'Failed!',
-          );
-          console.log("error2",error);
-          this.showLoader = false;
-        }
+        this.showLoader = false;
+        console.log('login response', response);
       }
     );
+
+    // this.service.submitLoginForm(request).subscribe(
+    //   (response) => {
+    //     console.log('response gotten')
+    //     this.loginResponse = response;
+    //     if (this.loginResponse.status === 200) {
+    //       const user = this.loginResponse.CustomerDetails[0];
+    //       this.showLoader = false;
+    //       // stores user data in localstorage
+    //       // this.service.storeUser(
+    //       //   user.CustomerID,
+    //       //   user.FirstName,
+    //       //   user.LastName,
+    //       //   user.Username,
+    //       //   user.MobileNumber,
+    //       //   user.EmailAddress,
+    //       //   user.Country,
+    //       //   user.Address_1,
+    //       //   user.Address_2
+    //       // );
+    //       this.router.navigate(['/portal/dashboard']);
+    //       this.toastr.success(this.loginResponse.description, 'Success!');
+    //     } else {
+    //       console.log('error')
+    //       this.toastr.error(this.loginResponse.description, 'Failed!');
+    //       this.showLoader = false;
+    //     }
+    //   },
+    //   (error: Response) => {
+    //     if (error.status === 404) {
+    //       this.toastr.error(
+    //         'An error occured : please contact support@sharpgas.com',
+    //         'Failed!',
+    //       );
+    //       console.log("error1", error);
+    //       this.showLoader = false;
+    //     } else {
+    //       this.toastr.success(
+    //         'An error occured : please contact support@sharpgas.com',
+    //         'Failed!',
+    //       );
+    //       console.log("error2",error);
+    //       this.showLoader = false;
+    //     }
+    //   }
+    // );
   }
 }
