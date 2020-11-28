@@ -10,6 +10,7 @@ import { EncryptionService } from '../../../services/Encryption/encryption.servi
 import {AuthenticationService} from '../../../services/Authentication/authentication.service';
 
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -32,7 +33,8 @@ export class LoginComponent implements OnInit {
     private service: LoginServiceService,
     private router: Router,
     private encryption: EncryptionService,
-    private authentication: AuthenticationService
+    private authentication: AuthenticationService,
+
   ) {}
 
   ngOnInit() {
@@ -64,10 +66,20 @@ export class LoginComponent implements OnInit {
   }
 
 
+  login(request: any){
+   return this.service.submitLoginForm(request).subscribe(
+      (resp: any) => {
+        console.log(resp);
+        return false;
+      }
+    );
+  }
+
 
 
   submitForm(request: any) {
 
+    const userToken = this.authentication.getUserToken;
     if (this.form.invalid) {
       PasswordValidator.validateAllFormFields(this.form);
       return;
@@ -82,20 +94,24 @@ export class LoginComponent implements OnInit {
     console.log(request);
     this.showLoader = true;
 
-    // this.authentication.Authenticate(request).subscribe(
-    //   (response) => {
-    //     this.showLoader = false;
-    //     console.log('authentication response', response);
-    //   }
-    // );
-
-    this.authentication.Authenticate(request).subscribe(
-      (response) => {
-        this.showLoader = false;
-        console.log('login response', response);
-      }
-    );
-
+    if (userToken !== null){
+      this.login(request);
+    }
+    else{
+      this.authentication.Authenticate(request).subscribe(
+        (response) => {
+          this.showLoader = false;
+          this.authentication.storeUserToken(response);
+          if (userToken){
+            this.login(request);
+          }
+          else{
+            console.log('user token not found!');
+            return false;
+          }
+        }
+      );
+    }
     // this.service.submitLoginForm(request).subscribe(
     //   (response) => {
     //     console.log('response gotten')

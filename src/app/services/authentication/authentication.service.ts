@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { CookieService } from 'ngx-cookie-service';
+
 
 const httpOptions = {
   headers: new HttpHeaders({
     "Content-Type": "application/json; charset=utf-8",
-
   })
 };
 
@@ -15,7 +16,9 @@ const httpOptions = {
 })
 export class AuthenticationService {
 
-  constructor(private http: HttpClient) { }
+
+
+  constructor(private http: HttpClient, private cookieService: CookieService ) { }
 
 
     Authenticate(request: any): Observable<any> {
@@ -28,6 +31,18 @@ export class AuthenticationService {
       .pipe
       //  catchError(this.handleError('signup', request))
       ();
+  }
+
+  storeUserToken(token: any) {
+    this.cookieService.set('token', token, 3600000);
+  }
+
+  getUserToken(){
+    return this.cookieService.get('token');
+  }
+
+  deleteUserToken(){
+    return this.cookieService.delete('token');
   }
 
 }

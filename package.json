@@ -25,6 +25,7 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
     "jsencrypt": "^3.0.0-rc.1",
+    "ngx-cookie-service": "^10.1.1",
     "ngx-toastr": "^13.0.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
