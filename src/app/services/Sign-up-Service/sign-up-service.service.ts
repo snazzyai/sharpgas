@@ -1,4 +1,4 @@
-import { environment } from "./../../../environments/environment.prod";
+import { environment } from "./../../../environments/environment";
 import { Injectable, ErrorHandler } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { SignUpRequest, SignUpResponse } from "src/app/Utilities/APIFramework";
@@ -21,7 +21,7 @@ export class SignUpServiceService {
     return this.http
       .post<SignUpResponse>(
         environment.enviromentURL + environment.SignUpEndpoint,
-        JSON.stringify(request),
+        request,
         httpOptions
       )
       .pipe

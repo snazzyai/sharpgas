@@ -138,6 +138,7 @@ export class SignUpComponent implements OnInit {
 
     return this.service.SubmitSignUpForm(request).subscribe(
       (response) => {
+        console.log('signup response ', response);
         this.responseSignUP = response;
         if (this.responseSignUP.status === 200) {
           this.toastr.success(this.responseSignUP.description, 'Success!', {
