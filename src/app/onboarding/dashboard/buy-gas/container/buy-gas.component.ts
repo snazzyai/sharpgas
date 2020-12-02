@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class BuyGasComponent implements OnInit {
 
   heading: string = 'Buy Gas';
+  selected: boolean = false;
 
   gasDetails: object[] = [
     {
@@ -42,6 +43,11 @@ export class BuyGasComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  setSelected(){
+    this.selected = !this.selected;
+    console.log(this.selected)
   }
 
 }

@@ -9,28 +9,36 @@
   <div>
     <h2>Available Gas</h2>
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-12">
         <div class="gas-container">
           <div class="gas-view" *ngFor="let gas of gasDetails">
-            <div>
+            <div class="gas-border">
               <img src="../../../../../assets/img/cylinderBuy.jpg" class="image-cylinder" alt="gas image"/>
               <div class="gas-text-container">
                 <p class="gas-text" ><span>Size: </span>{{gas.size}}</p>
                 <p class="gas-text"><span>Availability: </span>{{gas.availability}}</p>
-                <button class="button-cart">Add to Cart</button>
+                <p class="gas-text" id="cylinders">
+                  <span>Number of Cylinders: </span>
+                  <select class="form-control select-view" onselect="setSelected()">
+                    <option disabled>select here</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                </p>
+                <button class="button-cart" onclick="console.log('clicked car')" [disabled]="selected" >Add to Cart</button>
+                <button class="button-cart" onclick="console.log('clicked buy')" [disabled]="selected">Buy Now</button>
               </div>
             </div>
           </div>
 
         </div>
       </div>
-      <div class="col-md-3 cart-box">
-
+      <!-- user clicks to go to updated cart-->
+      <div class="goto-cart-button">
+        <button class="btn btn-primary pull-right mr-5">Go to Cart</button>
       </div>
-
     </div>
-
-
   </div>
 </app-sidebar>
   <!-- Profile -->

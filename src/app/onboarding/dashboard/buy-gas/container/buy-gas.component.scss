@@ -7,13 +7,16 @@
 .gas-view {
   background: linear-gradient(0deg, #ebedf5, rgba(235, 237, 245, 0));
   transition: transform 0.2s;
-  border: 1px #eee solid;
+  // border: 1px #eee solid;
   width: 30%;
   margin: 1.5rem;
+  border-radius: 1.5rem;
 }
 
 .gas-view:hover {
-  transform: scale(1.07);
+  #cylinders {
+    display: block;
+  }
 }
 .image-cylinder {
   height: 250px;
@@ -38,8 +41,21 @@
   background-color: rgb(133, 179, 64);
   padding: 8px;
   color: white;
+  margin: 0.5rem 0;
+  border-radius: 0.7rem;
+}
+
+#cylinders {
+  display: none;
 }
 
 .cart-box {
   border: 1px solid black;
+}
+
+.select-view {
+  margin: 0.5rem 0;
+}
+.goto-cart-button {
+  margin: 1.5rem 2.5rem;
 }
