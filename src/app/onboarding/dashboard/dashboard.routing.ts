@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './container/dashboard.component';
-import { PortfolioComponent } from './portfolio/container/portfolio.component';
 
 const routes: Routes = [
   {
@@ -20,6 +19,10 @@ const routes: Routes = [
       {
         path: 'buy-gas',
         loadChildren: () => import('./buy-gas/buy-gas.module').then(m => m.BuyGasModule)
+      },
+      {
+        path: 'cart',
+        loadChildren: () => import('./cart/cart.module').then(m => m.CartModule)
       },
     ]
   }

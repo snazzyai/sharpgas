@@ -11,6 +11,9 @@
   margin: 0 5px;
 }
 
+#main-nav {
+  width: 100%;
+}
 .btn-user {
   border: 0;
 }
@@ -36,15 +39,22 @@
   border-bottom-right-radius: 2rem;
 }
 
-.nav-item-right {
+.nav-view {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: relative;
   .nav-item-cart {
-    margin-right: 20px;
-
-    span {
-      // border-radius: 100%;
-    }
+    margin-right: 3rem;
+    cursor: pointer;
+    outline: none;
   }
+  .badge {
+    position: absolute;
+    top: 0.2rem;
+  }
+}
+
+.btn-group {
+  cursor: pointer;
 }
