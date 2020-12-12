@@ -1,30 +1,25 @@
 .gas-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  // display: flex;
+  // flex-direction: row;
+  // justify-content: space-between;
 }
 
 .gas-view {
   background: linear-gradient(0deg, #ebedf5, rgba(235, 237, 245, 0));
-  transition: transform 0.2s;
-  // border: 1px #eee solid;
-  width: 30%;
-  margin: 1.5rem;
   border-radius: 1.5rem;
+  margin: 1.5rem;
+  border: 1px #eee solid;
 }
 
 .gas-view:hover {
-  #cylinders {
-    display: block;
-  }
 }
 .image-cylinder {
-  height: 250px;
+  height: auto;
   margin: 0 auto;
   width: 100%;
 }
 .gas-text-container {
-  padding: 1.5rem;
+  padding: 0.5rem;
 }
 .gas-text {
   font-size: 0.9rem;
