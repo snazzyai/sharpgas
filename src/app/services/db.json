@@ -1,0 +1,35 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "size": "4kg",
+      "availability": "Available",
+      "imgUrl": "https://dc686.4shared.com/img/UAtIhhFqea/s24/1765acf6d00/cylinderBuy?async&rand=0.3976534309921209",
+      "price": 3000
+    },
+    {
+      "id": 2,
+      "size": "10kg",
+      "availability": "Available",
+      "imgUrl": "https://dc686.4shared.com/img/UAtIhhFqea/s24/1765acf6d00/cylinderBuy?async&rand=0.3976534309921209",
+      "price": 6000
+    },
+    {
+      "id": 3,
+      "size": "10kg",
+      "availability": "Available",
+      "imgUrl": "https://dc686.4shared.com/img/UAtIhhFqea/s24/1765acf6d00/cylinderBuy?async&rand=0.3976534309921209",
+      "price": 10000
+    },
+    {
+      "id": 4,
+      "size": "4kg",
+      "availability": "Available",
+      "imgUrl": "https://dc686.4shared.com/img/UAtIhhFqea/s24/1765acf6d00/cylinderBuy?async&rand=0.3976534309921209",
+      "price": 20000
+    }
+  ],
+  "cart": [
+
+  ]
+}

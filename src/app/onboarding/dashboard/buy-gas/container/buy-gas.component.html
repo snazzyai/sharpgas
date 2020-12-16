@@ -1,6 +1,6 @@
 
 
-<app-header [cartLength]=lengthOfCart ></app-header>
+<app-header></app-header>
 <app-sidebar>
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Buy gas</h1>
@@ -8,23 +8,22 @@
   <!-- Buy Gas -->
   <div>
     <h2>Available Gas</h2>
-        <div class="container-fluid">
-          <div class="col-lg-12">
-            <div class="row">
-              <div class="col-md-3 gas-view" *ngFor="let gas of gasDetails">
-                <div class="gas-border">
-                  <img src="../../../../../assets/img/cylinderBuy.jpg" class="image-cylinder" alt="gas image"/>
-                  <div class="gas-text-container">
-                    <p class="gas-text" ><span>Size: </span>{{gas.size}}</p>
-                    <p class="gas-text"><span>Availability: </span>{{gas.availability}}</p>
-                    <button class="button-cart" (click)="cartButtonClick(gas.id, gas.price, gas.size, gas.imgUrl)" data-toggle="modal" data-target="#cartAdded">Add to Cart</button>
-                    <!-- <button class="button-cart" (click)="buyButtonClick(gas.id, gas.price)">Buy Now</button> -->
-                  </div>
-                </div>
-              </div>
-            </div>
+    <div class="row">
+      <div class="col-md-2 gas-view" *ngFor="let product of products">
+        <div class="gas-border">
+          <img [src]="product.imgUrl" class="image-cylinder" alt="gas image"/>
+          <div class="gas-text-container">
+            <p class="gas-text" ><span>Size: </span>{{product.size}}</p>
+            <p class="gas-text"><span>Availability: </span>{{product.availability}}</p>
+            <button class="button-cart" (click)="addToCart(product)" data-toggle="modal" data-target="#cartAdded">Add to Cart</button>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <app-cart ></app-cart>
+
+    </div>
       <!-- user clicks to go to updated cart-->
       <div class="goto-cart-button">
         <button class="btn btn-primary pull-right mr-5">Go to Cart</button>

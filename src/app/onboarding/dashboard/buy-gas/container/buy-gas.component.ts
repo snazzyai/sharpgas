@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {CartService} from '../../../../services/Cart/cart.service';
+import { ProductsService } from '../../../../services/Products/products.service'
+import {IProduct} from '../../../../models/product'
+
 
 @Component({
   selector: 'app-buy-gas',
@@ -7,95 +11,62 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BuyGasComponent implements OnInit {
 
+
+  //this is a demo. Supposed to be used as service
   heading: string = 'Buy Gas';
   selected: boolean = false;
-  lengthOfCart: number = JSON.parse(localStorage.getItem('cart')).length
+  products: IProduct[];
+  cartLength: number;
 
-  gasDetails: object[] = [
-    {
-      id: 1,
-      size: '4kg',
-      availability: 'Available',
-      imgUrl: '../../../assets/img/cylinderBuy.jpg',
-      price: 3000
-    },
-    {
-      id: 2,
-      size: '10kg',
-      availability: 'Available',
-      imgUrl: '../../../assets/img/cylinderBuy.jpg',
-      price: 6000
-    },
-    {
-      id: 3,
-      size: '20kg',
-      availability: 'Available',
-      imgUrl: '../../../assets/img/cylinderBuy.jpg',
-      price: 10000
-    },
-    {
-      id: 4,
-      size: '50kg',
-      availability: 'Available',
-      imgUrl: '../../../assets/img/cylinderBuy.jpg',
-      price: 20000
-    }
-  ];
-  constructor() { }
+
+
+  constructor(private cartService: CartService, private productService: ProductsService) { }
 
   ngOnInit(): void {
+    //api call
+   this.productService.getProducts().subscribe((products)=>{
+    this.products = products
+   })
+
   }
 
   setSelected(){
     this.selected = !this.selected;
-    console.log(this.selected)
-  }
-
-  cartButtonClick(id, price,size, imgUrl){
-
-    const data =  {
-      id: id,
-      quantity: 1,
-      size: size,
-      price: price,
-      imgUrl: imgUrl,
-      total: price
-    }
-    if(localStorage.getItem('cart') === null){
-      localStorage.setItem('cart', JSON.stringify([data]) )
-      console.log('added to cart', JSON.parse(localStorage.getItem('cart')))
-    }
-    else{
-
-      let items = JSON.parse(localStorage.getItem('cart'))
-
-      //finds item with id and updates it
-      items.map((item)=>{
-        if(item.id === id){
-          item.quantity += 1
-          item.total = item.quantity * item.price
-          console.log('updated cart')
-        }
-      })
-
-      //check to see if item is present, if not it adds a new item
-     let foundItem =  items.find((item)=>{
-        return item.id === id
-      })
-      console.log('found item', foundItem)
-      if(foundItem === undefined){
-        items.push(data)
-        console.log('newItem Added')
-      }
-      localStorage.setItem('cart', JSON.stringify(items))
-      console.log(JSON.parse(localStorage.getItem('cart')))
-    }
-
 
   }
 
-  buyButtonClick(id){
-    console.log('buybutton', id)
+
+  //local implementation
+  addToCart(product){
+    let payload = {
+      ...product,
+      quantity: 1
+    }
+    this.cartService.sendMsg(payload)
+    // this.cartService.getCartLength().subscribe(len=>{
+    //   console.log(len)
+    // })
+    // this.cartService.getCartLength().subscribe((length:any)=>{
+    //   console.log(length)
+    //   if(length){
+    //     this.cartLength = length
+    //    }
+    //    this.cartLength = 0
+    // })
   }
+
+  //server implementation
+  // addToCart(product, qty){
+  //   //server adds to cart the filtered product and updated quantity and returns back the new cart Items
+  //   let payload = {
+  //    productId: product.id,
+  //    quantity: qty
+
+  //   }
+  //   this.cartService.addCartItems(payload).subscribe((items)=>{
+  //     this.cartService.sendMsg(items)
+  //   })
+
+  // }
 
 }
