@@ -30,7 +30,7 @@ export class LoginServiceService {
 
   submitLoginForm(request: LoginRequest): Observable<any> {
     console.log(`url ${environment.enviromentURL + environment.LoginEndPoint}`);
-    console.log(this.userToken);
+    console.log("usertoken fron submitloginform", this.userToken);
     return this.http
       .post<any>(
         environment.enviromentURL + environment.LoginEndPoint,
@@ -42,9 +42,9 @@ export class LoginServiceService {
       ();
   }
 
-  isAuthenticated() {
-    let user = JSON.parse(localStorage.getItem("user"));
-    return user != null;
-  }
+  // isAuthenticated() {
+  //   let user = JSON.parse(localStorage.getItem("user"));
+  //   return user != null;
+  // }
 
 }

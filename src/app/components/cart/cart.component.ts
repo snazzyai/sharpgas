@@ -45,7 +45,6 @@ export class CartComponent implements OnInit {
 
 
   addProductToCart(){
-
     this.cartService.getMsg().subscribe((items:any)=>{
        let productExists = false
        console.log(items)

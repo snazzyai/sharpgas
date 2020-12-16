@@ -79,7 +79,6 @@ export class LoginComponent implements OnInit {
 
   submitForm(request: any) {
 
-    const userToken = this.authentication.getUserToken;
     if (this.form.invalid) {
       PasswordValidator.validateAllFormFields(this.form);
       return;
@@ -94,25 +93,32 @@ export class LoginComponent implements OnInit {
     console.log(request);
     this.showLoader = true;
 
-    if (userToken !== null){
-      this.login(request);
-      this.showLoader = false;
-    }
-    else{
+
+    // if (userToken === null){
+      console.log('authenticate!')
       this.authentication.Authenticate(request).subscribe(
         (response) => {
           this.showLoader = false;
+
+          console.log(response)
           this.authentication.storeUserToken(response);
-          if (userToken){
-            this.login(request);
-          }
-          else{
-            console.log('user token not found!');
-            return false;
-          }
+          console.log('storedUser')
+
+          // if (userToken){
+          //   this.login(request);
+          // }
+          // else{
+          //   console.log('user token not found!');
+          //   return false;
+          // }
         }
       );
-    }
+    // }
+    // else{
+    //   this.login(request);
+    //   this.showLoader = false;
+
+    // }
     // this.service.submitLoginForm(request).subscribe(
     //   (response) => {
     //     console.log('response gotten')
