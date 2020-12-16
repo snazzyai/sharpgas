@@ -86,21 +86,27 @@ export class LoginComponent implements OnInit {
     }
     // encrypt user details
 
-    request = {
+    var request2 = {
       username: this.encryption.encrypt2("john.doe"),
       password: this.encryption.encrypt2("john.password")
     };
 
-    console.log(request);
+    // console.log(request);
     this.showLoader = true;
 
-    if (userToken !== null){
-      this.login(request);
-      this.showLoader = false;
-    }
-    else{
-      this.authentication.Authenticate(request).subscribe(
+    // if (userToken !== null){
+    //   console.log('token is not working');
+    //   this.login(request);
+    //   this.showLoader = false;
+    // }
+    // else{
+     request = {
+        email: this.encryption.encrypt2(this.form.value.emailAdd),
+        Password: this.encryption.encrypt2(this.form.value.passWord)
+      }
+      this.authentication.Authenticate(request2).subscribe(
         (response) => {
+          console.log('token is working'+ response);
           this.showLoader = false;
           this.authentication.storeUserToken(response);
           if (userToken){
@@ -112,7 +118,7 @@ export class LoginComponent implements OnInit {
           }
         }
       );
-    }
+    // }
     // this.service.submitLoginForm(request).subscribe(
     //   (response) => {
     //     console.log('response gotten')

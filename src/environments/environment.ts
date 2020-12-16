@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   // enviromentURL: 'http://localhost/Publish/api/SharpCustomers'
   enviromentURL: "http://sharpgasapi.somee.com/",
+  // enviromentURL: "https://localhost:44362/",
   SignUpEndpoint: "api/Onboarding/SignUp",
   LoginEndPoint: "api/Onboarding/Login",
   authenticationEndPoint: "api/Authentication",
