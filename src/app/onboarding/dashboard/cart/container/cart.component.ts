@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {CartService} from '../../../../services/Cart/cart.service'
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -7,42 +7,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-  cart: object[] = [
-    {
-      id: 1,
-      size: '4kg',
-      availability: 'Available',
-      image: 'imageLink',
-      imgUrl: '../../../assets/img/cylinderBuy.jpg'
-    },
-    {
-      id: 2,
-      size: '10kg',
-      availability: 'Available',
-      image: 'imageLink',
-      imgUrl: '../../../assets/img/cylinderBuy.jpg'
-    },
-    {
-      id: 3,
-      size: '20kg',
-      availability: 'Available',
-      image: 'imageLink',
-      imgUrl: '../../../assets/img/cylinderBuy.jpg'
-    },
-    {
-      id: 4,
-      size: '50kg',
-      availability: 'Available',
-      image: 'imageLink',
-      imgUrl: '../../../assets/img/cylinderBuy.jpg'
-    }
-  ];
-  constructor() { }
+  // this is using localstorage temporarily
+  items: [] = []
+  constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
+    //server call to get all cart items
+    this.cartService.getCartItems().subscribe((cartItems: any)=>{
+      this.items = cartItems
+    })
+
   }
 
 
 
 
+ currencyFormat(amount: number){
+   return this.cartService.formatMoney(amount)
+ }
+
+
+  getNumberOfItems(){
+
+  }
+
+  getTotalPrice(){
+
+  }
+
+  // onButtonClickPlus(id){
+  //   console.log('plus')
+  //   this.cart.increaseQuantity(id)
+  // }
+
+  // onButtonClickMinus(id){
+  //   console.log('minus')
+  //   this.cart.decreaseQuantity(id)
+  // }
 }
+

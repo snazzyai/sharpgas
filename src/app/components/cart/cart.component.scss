@@ -1,0 +1,45 @@
+.btn {
+  border: 1px solid #eee;
+}
+
+.button-checkout {
+  background: purple;
+  color: #fff;
+}
+.button-minus {
+  margin-right: 10px;
+}
+
+.button-plus {
+  margin-left: 10px;
+}
+
+.heading-text {
+  color: grey;
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.text-product {
+  font-weight: bold;
+}
+
+.summary-text {
+  font-size: 15px;
+  color: grey;
+  font-weight: 500;
+}
+// summary  part
+.summary-view {
+  background-color: rgb(232, 243, 243);
+  padding: 1rem;
+  p {
+    @extend .summary-text;
+  }
+  span {
+    font-size: 14px;
+    font-weight: bold;
+    @extend .summary-text;
+  }
+}

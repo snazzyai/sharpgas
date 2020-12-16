@@ -3,14 +3,15 @@ import { CommonModule } from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {HeaderComponent} from '../header/header.component';
 import {SidebarComponent} from '../sidebar/sidebar.component';
+import { CartComponent } from '../cart/cart.component';
 
 
 @NgModule({
-  declarations: [HeaderComponent, SidebarComponent],
+  declarations: [HeaderComponent, SidebarComponent, CartComponent],
   imports: [
     CommonModule,
     RouterModule
   ],
-  exports: [SidebarComponent, HeaderComponent]
+  exports: [SidebarComponent, HeaderComponent, CartComponent]
 })
 export class SharedModule { }

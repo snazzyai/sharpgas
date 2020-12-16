@@ -1,0 +1,28 @@
+<div class="col-md-12" *ngIf= "!showEmptyCart">
+  <p class="heading-text">Order Summary</p>
+  <div class="summary-view">
+    <div class="row" *ngFor="let item of cartItems">
+      <div class="col-md-4">
+        <p>{{item.size}} Gas Cylinder</p>
+      </div>
+      <div class="col-md-4">
+        <p> x {{item.quantity}} </p>
+      </div>
+      <div class="col-md-4">
+        <button>Remove</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mt-3">
+        <p>Total Price </p>
+        <span>{{cartTotal}}</span>
+      </div>
+      <div class="col-md-6 mt-4">
+        <button class='btn button-checkout' routerLink="/onboarding/dashboard/checkout">Checkout</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-12" *ngIf= "showEmptyCart">
+  <p class="heading-text">No Item in your Cart..</p>
+</div>
