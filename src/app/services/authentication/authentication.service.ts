@@ -38,8 +38,7 @@ export class AuthenticationService {
   }
 
   getUserToken(){
-       return this.cookieService.get('token');
-
+    return this.cookieService.get('token').toString();
   }
 
   deleteUserToken(){
