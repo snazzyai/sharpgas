@@ -67,12 +67,13 @@ export class LoginComponent implements OnInit {
 
 
   login(request: any){
-   return this.service.submitLoginForm(request).subscribe(
-      (resp: any) => {
-        console.log(resp);
-        return false;
-      }
-    );
+   return this.service.submitLoginForm(request);
+  //  .subscribe(
+  //     (resp: any) => {
+  //       console.log(resp);
+  //       return false;
+  //     }
+  //   );
   }
 
 
@@ -110,7 +111,14 @@ export class LoginComponent implements OnInit {
           this.showLoader = false;
           this.authentication.storeUserToken(response);
           if (userToken){
-            this.login(request);
+          this.login(request)  
+             .subscribe(
+                  (resp: any) => {
+                    this.router.navigate(['/onboarding/dashboard']);
+                    this.toastr.error('Login Successful','Success!');
+                    this.showLoader = false;
+                  }
+                );
           }
           else{
             console.log('user token not found!');
