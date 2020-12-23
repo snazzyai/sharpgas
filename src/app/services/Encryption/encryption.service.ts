@@ -36,7 +36,7 @@ export class EncryptionService {
       firstname: this.encrypt2(form.value.firstName),
       lastName: this.encrypt2(form.value.lastName),
       email: this.encrypt2(form.value.emailAdd),
-      mobileNumber: this.encrypt2(form.value.mobileNumber),
+      mobileNumber: this.encrypt2(form.value.mobileNumber.toString()),
       password: this.encrypt2(form.value.passWord),
     };
   }

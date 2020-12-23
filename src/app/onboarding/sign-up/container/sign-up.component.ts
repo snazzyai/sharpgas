@@ -171,7 +171,9 @@ export class SignUpComponent implements OnInit {
     this.showLoaders()
     const adminData = this.encryption.adminEncryptedData()
 
+    console.log(form.value.mobileNumber)
     const encryptedUserData = this.encryption.signupEncrptedData(form)
+    console.log('encryprted logi = ' + JSON.stringify(encryptedUserData))
 
     this.authentication(encryptedUserData, adminData);
 
