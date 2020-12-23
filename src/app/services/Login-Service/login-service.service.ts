@@ -9,6 +9,7 @@ import {
   BookResponse
 } from "../../Utilities/APIFramework";
 import { Observable } from "rxjs";
+import { catchError } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -16,35 +17,28 @@ import { Observable } from "rxjs";
 export class LoginServiceService {
 
 
-  constructor(private http: HttpClient, private authentication: AuthenticationService) {}
 
 
-  private userToken = this.authentication.getUserToken() || null;
+constructor(private http: HttpClient, private authentication: AuthenticationService) {}
 
- private httpOptions = {
-  headers: new HttpHeaders({
-    "Content-Type": "application/json; charset=utf-8",
-    "Authorization": `Bearer ${this.userToken}`
-  })
-};
+  SubmitLoginForm(request: LoginRequest, token: any): Observable<any> {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json; charset=utf-8",
+        "Authorization": `Bearer ${token}`
+      })
+    }
 
-  submitLoginForm(request: LoginRequest): Observable<any> {
-    console.log(`url ${environment.enviromentURL + environment.LoginEndPoint}`);
-    console.log("usertoken fron submitloginform", this.userToken);
     return this.http
       .post<any>(
         environment.enviromentURL + environment.LoginEndPoint,
         request,
-        this.httpOptions
+        httpOptions
       )
       .pipe
-      //  catchError(this.handleError('signup', request))
-      ();
+
+      (
+        catchError(err => err)
+      );
   }
-
-  // isAuthenticated() {
-  //   let user = JSON.parse(localStorage.getItem("user"));
-  //   return user != null;
-  // }
-
 }

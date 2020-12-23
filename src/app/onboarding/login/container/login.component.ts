@@ -27,13 +27,14 @@ export class LoginComponent implements OnInit {
   request: LoginRequest;
   loginResponse: LoginResponse;
   form: FormGroup;
+  disableButton: boolean = false;
 
   constructor(
     private toastr: ToastrService,
-    private service: LoginServiceService,
     private router: Router,
     private encryption: EncryptionService,
-    private authentication: AuthenticationService,
+    private authService: AuthenticationService,
+    private loginService: LoginServiceService
 
   ) {}
 
@@ -65,107 +66,62 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  disableLoaders(){
+    this.showLoader = false
+    this.disableButton = false
+  }
 
-  login(request: any){
-   return this.service.submitLoginForm(request).subscribe(
-      (resp: any) => {
-        console.log(resp);
-        return false;
-      }
-    );
+  showLoaders(){
+    this.showLoader = true
+    this.disableButton = true
   }
 
 
 
-  submitForm(request: any) {
+  submitForm(form: any) {
 
     if (this.form.invalid) {
       PasswordValidator.validateAllFormFields(this.form);
       return;
     }
+    this.showLoaders()
     // encrypt user details
-
-    var request2 = {
-      username: this.encryption.encrypt2("john.doe"),
-      password: this.encryption.encrypt2("john.password")
-    };
-
-    // console.log(request);
-    this.showLoader = true;
-
-    // if (userToken !== null){
-    //   console.log('token is not working');
-    //   this.login(request);
-    //   this.showLoader = false;
-    // }
-    // else{
-     request = {
-        email: this.encryption.encrypt2(this.form.value.emailAdd),
-        Password: this.encryption.encrypt2(this.form.value.passWord)
-      }
-      this.authentication.Authenticate(request2).subscribe(
-        (response) => {
-          console.log('token is working'+ response);
-          this.showLoader = false;
-
-          console.log(response)
-          this.authentication.storeUserToken(response);
-          console.log('storedUser')
-
-          // if (userToken){
-          //   this.login(request);
-          // }
-          // else{
-          //   console.log('user token not found!');
-          //   return false;
-          // }
-        }
-      );
-    // }
-    // this.service.submitLoginForm(request).subscribe(
-    //   (response) => {
-    //     console.log('response gotten')
-    //     this.loginResponse = response;
-    //     if (this.loginResponse.status === 200) {
-    //       const user = this.loginResponse.CustomerDetails[0];
-    //       this.showLoader = false;
-    //       // stores user data in localstorage
-    //       // this.service.storeUser(
-    //       //   user.CustomerID,
-    //       //   user.FirstName,
-    //       //   user.LastName,
-    //       //   user.Username,
-    //       //   user.MobileNumber,
-    //       //   user.EmailAddress,
-    //       //   user.Country,
-    //       //   user.Address_1,
-    //       //   user.Address_2
-    //       // );
-    //       this.router.navigate(['/portal/dashboard']);
-    //       this.toastr.success(this.loginResponse.description, 'Success!');
-    //     } else {
-    //       console.log('error')
-    //       this.toastr.error(this.loginResponse.description, 'Failed!');
-    //       this.showLoader = false;
-    //     }
-    //   },
-    //   (error: Response) => {
-    //     if (error.status === 404) {
-    //       this.toastr.error(
-    //         'An error occured : please contact support@sharpgas.com',
-    //         'Failed!',
-    //       );
-    //       console.log("error1", error);
-    //       this.showLoader = false;
-    //     } else {
-    //       this.toastr.success(
-    //         'An error occured : please contact support@sharpgas.com',
-    //         'Failed!',
-    //       );
-    //       console.log("error2",error);
-    //       this.showLoader = false;
-    //     }
-    //   }
-    // );
+    const userData = this.encryption.userEncryptedData(form.value.emailAdd, form.value.passWord)
+    const adminData = this.encryption.adminEncryptedData()
+    this.authentication(userData, adminData);
   }
+
+
+  authentication(userData, adminData){
+    this.authService.Authenticate(adminData).subscribe((response)=>{
+      console.log(response)
+      if(response.message === "Success"){
+        //store response in observable
+        const token = response.data.bearerToken
+        const exp = response.data.expiryPeriod
+        this.authService.storeToken(response)
+        this.login(userData, token)
+      }
+      else {
+        console.log('unable to store token')
+        this.disableLoaders();
+      }
+    })
+  }
+
+  login(userData, token){
+    this.loginService.SubmitLoginForm(userData, token).subscribe((resp)=>{
+      //pass user data to an observable
+      console.log(resp)
+      if(this.authService.storeUser(resp)){
+        this.router.navigate(['onboarding/dashboard'])
+        this.disableLoaders();
+      }
+      else{
+          console.log("user token not gotten");
+          this.disableLoaders()
+      }
+    })
+  }
+
 }

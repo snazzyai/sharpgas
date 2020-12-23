@@ -6,6 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PasswordValidator } from 'src/app/Utilities/CustomValidators';
 import { SignUpResponse, SignUpRequest } from 'src/app/Utilities/APIFramework';
 import { ToastrService } from 'ngx-toastr';
+import {AuthenticationService} from '../../../services/Authentication/authentication.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,17 +20,18 @@ export class SignUpComponent implements OnInit {
   rePasswordType = 'password';
 
   alphabetRegex = '^[a-zA-Z]+$';
-  responseSignUP: SignUpResponse;
   showLoader: boolean;
-  disableButton: boolean = true;
+  disableButton: boolean = false;
   showerror: boolean = false;
   form: FormGroup;
 
   constructor(
-    private service: SignUpServiceService,
+    private signupService: SignUpServiceService,
     private toastr: ToastrService,
     private router: Router,
-    private encryption: EncryptionService
+    private encryption: EncryptionService,
+    private authService: AuthenticationService
+
   ) {}
 
   ngOnInit() {
@@ -115,67 +117,63 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-  submitForm(request: any) {
+
+  disableLoaders(){
+    this.showLoader = false
+    this.disableButton = false;
+  }
+
+  showLoaders(){
+    this.showLoader = true
+    this.disableButton = true
+  }
+
+
+
+  authentication(userData, adminData){
+    this.authService.Authenticate(adminData).subscribe((response)=>{
+      console.log(response)
+      if(response.message === "Success"){
+        //store response in observable
+        const token = response.data.bearerToken
+        const exp = response.data.expiryPeriod
+        this.authService.storeToken(response)
+        this.signup(userData, token)
+      }
+      else {
+        console.log('unable to store token')
+        this.disableLoaders();
+      }
+    })
+  }
+
+
+  signup(userData, token){
+    this.signupService.SubmitSignUpForm(userData, token).subscribe((resp)=>{
+      //pass user data to an observable
+      console.log(resp)
+      if(this.authService.storeUser(resp)){
+        this.router.navigate(['onboarding/dashboard'])
+        this.disableLoaders();
+      }
+      else{
+        console.log('couldnt store user');
+        this.disableLoaders()
+      }
+    })
+  }
+
+  submitForm(form: any) {
     if (this.form.invalid) {
       PasswordValidator.validateAllFormFields(this.form);
       return;
     }
+    this.showLoaders()
+    const adminData = this.encryption.adminEncryptedData()
 
-    // encrypt signup data
+    const encryptedUserData = this.encryption.signupEncrptedData(form)
 
+    this.authentication(encryptedUserData, adminData);
 
-    this.showLoader = true;
-    this.disableButton = false;
-    request = {
-      firstname: this.encryption.encrypt2(this.form.value.firstName),
-      lastName: this.encryption.encrypt2(this.form.value.lastName),
-      email: this.encryption.encrypt2(this.form.value.emailAdd),
-      mobileNumber: this.encryption.encrypt2(this.form.value.mobileNumber),
-      password: this.encryption.encrypt2(this.form.value.passWord),
-    };
-
-    console.log(request);
-
-    return this.service.SubmitSignUpForm(request).subscribe(
-      (response) => {
-        console.log('signup response ', response);
-        this.responseSignUP = response;
-        if (this.responseSignUP.status === 200) {
-          this.toastr.success(this.responseSignUP.description, 'Success!', {
-            positionClass: 'toast-bottom-right',
-          });
-          this.router.navigate(['login']);
-          this.showLoader = false;
-          this.disableButton = true;
-        } else {
-          this.toastr.error(this.responseSignUP.description, 'Failed!', {
-            positionClass: 'toast-bottom-right',
-          });
-          this.showLoader = false;
-          this.disableButton = true;
-        }
-      },
-      (error: Response) => {
-        if (error.status === 404) {
-          this.toastr.error(
-            'An error occured : please contact support@sharpgas.com',
-            'Failed!',
-            { positionClass: 'toast-bottom-right' }
-          );
-          console.log(error);
-          this.showLoader = false;
-          this.disableButton = true;
-        } else {
-          this.toastr.error(
-            'An error occured : please contact support@sharpgas.com',
-            'Failed!',
-            { positionClass: 'toast-bottom-right' }
-          );
-          console.log(error);
-          this.showLoader = false;
-          this.disableButton = true;
-        }
-      }
-    );
   }
 }

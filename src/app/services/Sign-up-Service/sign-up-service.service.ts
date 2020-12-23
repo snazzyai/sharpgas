@@ -3,7 +3,8 @@ import { Injectable, ErrorHandler } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { SignUpRequest, SignUpResponse } from "src/app/Utilities/APIFramework";
 import { Observable } from "rxjs";
-import { catchError } from "rxjs/operators";
+
+
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,9 +18,16 @@ const httpOptions = {
 export class SignUpServiceService {
   constructor(private http: HttpClient) {}
 
-  SubmitSignUpForm(request: SignUpRequest): Observable<SignUpResponse> {
+  SubmitSignUpForm(request: SignUpRequest, token: any): Observable<SignUpResponse> {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json; charset=utf-8",
+        "Authorization": `Bearer ${token}`
+      })
+    }
+
     return this.http
-      .post<SignUpResponse>(
+      .post<any>(
         environment.enviromentURL + environment.SignUpEndpoint,
         request,
         httpOptions
