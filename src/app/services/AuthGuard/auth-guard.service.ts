@@ -5,22 +5,29 @@ import {
   RouterStateSnapshot,
   Router
 } from "@angular/router";
-import { LoginServiceService } from "../services/Login-Service/login-service.service";
+import { AuthenticationService } from "../Authentication/authentication.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthGuardService implements CanActivate {
   constructor(
-    private authService: LoginServiceService,
+    private authService: AuthenticationService,
     private router: Router
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.authService.isAuthenticated()) {
-      return true;
+    let token;
+    this.authService.getToken().subscribe(respToken=>{
+      token = respToken
+    })
+    if(token){
+      // this.router.navigate(["onboarding/dashboard"])
+      return true
     }
-    this.router.navigate(["/login"]);
-    return false;
+    else{
+      // this.router.navigate(["onboarding/login"]);
+      return false;
+    }
   }
 }

@@ -16,12 +16,12 @@ const httpOptions = {
 })
 export class AuthenticationService {
 
-
+  private token = null;
+  private user = null;
 
   constructor(private http: HttpClient, private cookieService: CookieService ) { }
 
-
-    Authenticate(request: any): Observable<any> {
+  Authenticate(request: any): Observable<any> {
     return this.http
       .post<any>(
         environment.enviromentURL + environment.authenticationEndPoint,
@@ -33,16 +33,46 @@ export class AuthenticationService {
       ();
   }
 
-  storeUserToken(token: any) {
-    this.cookieService.set('token', token, 3600000);
+
+  storeToken(token: any){
+    this.token = token
   }
 
-  getUserToken(){
-    return this.cookieService.get('token').toString();
+  storeUser(user: any){
+    this.user = user
+    if(this.user !== null){
+      return true
+    }
+    else{
+      return false;
+    }
   }
 
-  deleteUserToken(){
-    return this.cookieService.delete('token');
+
+  getToken(){
+    const token = new Observable((observer)=>{
+      if(this.token){
+        let token = this.token
+        observer.next(token)
+      }
+      else{
+        observer.error('token not found');
+      }
+    })
+    return token
+  }
+
+  getUser(){
+    const user = new Observable((observer)=>{
+      if(this.user){
+        let user = this.user
+        observer.next(user)
+      }
+      else{
+        observer.error('user not found');
+      }
+    })
+    return user
   }
 
 }

@@ -22,13 +22,13 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label class="bmd-label-floating">Fist Name</label>
-                        <input type="text" class="form-control" placeholder="Abdulsalam"  disabled>
+                        <input type="text" class="form-control" [placeholder]="user.data.firstName"  disabled>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label class="bmd-label-floating">Last Name</label>
-                        <input type="text" class="form-control" placeholder="Ibrahim" disabled>
+                        <input type="text" class="form-control" [placeholder]="user.data.lastName" disabled>
                       </div>
                     </div>
                   </div>
@@ -36,7 +36,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="bmd-label-floating">Adress</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" [placeholder]="">
                       </div>
                     </div>
                   </div>
@@ -45,13 +45,13 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label class="bmd-label-floating">Email Address</label>
-                        <input type="email" class="form-control">
+                        <input type="email" class="form-control" [placeholder]="user.data.emailAddress">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label class="bmd-label-floating">Phone Number</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" [placeholder]="user.data.mobileNumber">
                       </div>
                     </div>
                   </div>

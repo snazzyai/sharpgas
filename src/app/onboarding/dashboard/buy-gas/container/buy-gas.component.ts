@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CartService} from '../../../../services/Cart/cart.service';
 import { ProductsService } from '../../../../services/Products/products.service'
 import {IProduct} from '../../../../models/product'
+import {AuthenticationService} from '../../../../services/Authentication/authentication.service'
 
 
 @Component({
@@ -17,13 +18,17 @@ export class BuyGasComponent implements OnInit {
   selected: boolean = false;
   products: IProduct[];
   cartLength: number;
+  token:any;
 
 
 
-  constructor(private cartService: CartService, private productService: ProductsService) { }
+  constructor(private cartService: CartService, private productService: ProductsService, private authService: AuthenticationService) { }
 
   ngOnInit(): void {
-    //api call
+    //get token
+    this.authService.getToken().subscribe(token => this.token = token)
+    console.log(this.token)
+    //api call with usertoken
    this.productService.getProducts().subscribe((products)=>{
     this.products = products
    })

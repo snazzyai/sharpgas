@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthenticationService} from '../../../../services/Authentication/authentication.service'
 
 @Component({
   selector: 'app-portfolio',
@@ -9,16 +10,18 @@ export class PortfolioComponent implements OnInit {
 
   toShowEdit: boolean = true;
   toShowUpdate: boolean = false;
+  token: any;
+  user: any;
 
-  constructor() { }
+  constructor(private authService: AuthenticationService) { }
 
   ngOnInit(): void {
+    this.authService.getUser().subscribe(user => this.user = user)
   }
   showEdit(){
     this.toShowUpdate = !this.toShowUpdate;
     this.toShowEdit = !this.toShowEdit;
   }
-
   showUpdate(){}
 
 }
