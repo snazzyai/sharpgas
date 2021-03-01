@@ -30,7 +30,9 @@ import { SharedModule} from './components/shared/shared.module';
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
-    ToastrModule.forRoot({ positionClass: 'inline' }),
+    ToastrModule.forRoot(
+      {  positionClass: 'toast-bottom-right'}
+    ),
     ToastContainerModule,
     OnboardingModule,
     ResetPasswordModule,

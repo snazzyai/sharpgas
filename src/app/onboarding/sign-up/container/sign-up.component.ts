@@ -153,14 +153,23 @@ export class SignUpComponent implements OnInit {
       //pass user data to an observable
       console.log(resp)
       if(this.authService.storeUser(resp)){
+        this.toastr.success("Sign Up Successful")
         this.router.navigate(['onboarding/dashboard'])
+
         this.disableLoaders();
       }
       else{
         console.log('couldnt store user');
+        this.toastr.error("oops, Don't tell anyone, system failure");
         this.disableLoaders()
       }
-    })
+    },
+    (error) => {
+      console.log(error.error.message)
+      this.toastr.error(error.error.message);
+      this.disableLoaders()
+    }
+    )
   }
 
   submitForm(form: any) {
