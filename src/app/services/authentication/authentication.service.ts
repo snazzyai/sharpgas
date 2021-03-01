@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { CookieService } from 'ngx-cookie-service';
+import { catchError} from 'rxjs/operators'
 
 
 const httpOptions = {
@@ -29,8 +30,9 @@ export class AuthenticationService {
         httpOptions
       )
       .pipe
-      //  catchError(this.handleError('signup', request))
-      ();
+      (
+        catchError( error => error)
+      );
   }
 
 

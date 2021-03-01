@@ -112,7 +112,7 @@ export class LoginComponent implements OnInit {
   login(userData, token){
     this.loginService.SubmitLoginForm(userData, token).subscribe((resp)=>{
       //pass user data to an observable
-      console.log(resp)
+      console.log("login",resp)
       if(this.authService.storeUser(resp)){
         this.router.navigate(['onboarding/dashboard'])
         this.disableLoaders();
