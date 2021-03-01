@@ -17,25 +17,25 @@
                 <p class="card-category">Profile details</p>
               </div>
               <div class="card-body">
-                <form>
-                  <div class="row">
+                <form *ngFor="let data of user.data">
+                  <div class="row" >
                     <div class="col-md-6">
                       <div class="form-group">
                         <label class="bmd-label-floating">Fist Name</label>
-                        <input type="text" class="form-control" [placeholder]="user.data.firstName"  disabled>
+                        <input type="text" class="form-control" [placeholder]="data.firstName"  disabled>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label class="bmd-label-floating">Last Name</label>
-                        <input type="text" class="form-control" [placeholder]="user.data.lastName" disabled>
+                        <input type="text" class="form-control" [placeholder]="data.lastName" disabled>
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label class="bmd-label-floating">Adress</label>
+                        <label class="bmd-label-floating">Address</label>
                         <input type="text" class="form-control" [placeholder]="">
                       </div>
                     </div>
@@ -45,13 +45,13 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label class="bmd-label-floating">Email Address</label>
-                        <input type="email" class="form-control" [placeholder]="user.data.emailAddress">
+                        <input type="email" class="form-control" [placeholder]="data.emailAddress">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label class="bmd-label-floating">Phone Number</label>
-                        <input type="text" class="form-control" [placeholder]="user.data.mobileNumber">
+                        <input type="text" class="form-control" [placeholder]="data.mobileNumber">
                       </div>
                     </div>
                   </div>
