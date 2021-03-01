@@ -121,6 +121,10 @@ export class LoginComponent implements OnInit {
           console.log("user token not gotten");
           this.disableLoaders()
       }
+    },
+    (error) => {
+      console.log(error.error.message)
+      this.disableLoaders()
     })
   }
 

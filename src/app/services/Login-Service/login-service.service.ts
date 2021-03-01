@@ -22,7 +22,7 @@ export class LoginServiceService {
 constructor(private http: HttpClient, private authentication: AuthenticationService) {}
 
   SubmitLoginForm(request: LoginRequest, token: any): Observable<any> {
-    let httpOptions = {
+    let httpOptions = { 
       headers: new HttpHeaders({
         "Content-Type": "application/json; charset=utf-8",
         "Authorization": `Bearer ${token}`
@@ -35,10 +35,9 @@ constructor(private http: HttpClient, private authentication: AuthenticationServ
         request,
         httpOptions
       )
-      .pipe
-
-      (
-        catchError(err => err)
-      );
+      // .pipe
+      // (
+      //   catchError(err => err)
+      // );
   }
 }
