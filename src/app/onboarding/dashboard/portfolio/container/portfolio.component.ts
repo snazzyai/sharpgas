@@ -26,4 +26,9 @@ export class PortfolioComponent implements OnInit {
   }
   showUpdate(){}
 
+
+  updateProfile(){
+
+  }
+
 }
