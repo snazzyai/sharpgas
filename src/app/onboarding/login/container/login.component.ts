@@ -114,13 +114,20 @@ export class LoginComponent implements OnInit {
       //pass user data to an observable
       console.log("login",resp)
       if(this.authService.storeUser(resp)){
+        this.toastr.success("Login Successful");
         this.router.navigate(['onboarding/dashboard'])
         this.disableLoaders();
       }
       else{
+          this.toastr.error("oops, Don't tell anyone, system failure");
           console.log("user token not gotten");
           this.disableLoaders()
       }
+    },
+    (error) => {
+      console.log(error.error.message)
+      this.toastr.error(error.error.message);
+      this.disableLoaders()
     })
   }
 
