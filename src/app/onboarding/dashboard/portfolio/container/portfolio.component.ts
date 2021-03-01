@@ -16,7 +16,10 @@ export class PortfolioComponent implements OnInit {
   constructor(private authService: AuthenticationService) { }
 
   ngOnInit(): void {
-    this.authService.getUser().subscribe(user => this.user = user)
+    this.authService.getUser().subscribe(user => {
+      this.user = user
+    })
+    console.log(this.user.data)
   }
   showEdit(){
     this.toShowUpdate = !this.toShowUpdate;
