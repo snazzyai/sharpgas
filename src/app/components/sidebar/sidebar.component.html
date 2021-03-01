@@ -2,9 +2,9 @@
 <div class="container-fluid">
   <div class="row">
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-      <div class="img-user">
+      <div class="img-user" *ngFor="let data of user.data" >
         <img class="img-circle" src="../../../../assets/img/default-avatar.png" />
-        <p class="text-user">Abdulsalam</p>
+        <p class="text-user">{{data.firstName + ' ' + data.lastName}}</p>
       </div>
 
       <div class="sidebar-sticky pt-3">

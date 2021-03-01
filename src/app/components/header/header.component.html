@@ -17,9 +17,9 @@
         <div class="user-dropdown">
           <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="nav-item-right">
-              <div>
+              <div *ngFor="let data of user.data" >
                 <i class="fa fa-user icon icon-color-orange"></i>
-                <span class="user-text">Abdulsalam</span>
+                <span class="user-text">{{data.firstName + ' ' + data.lastName}}</span>
                 <i class="fas fa-chevron-circle-down dropdown-logo" >
                 </i>
               </div>
