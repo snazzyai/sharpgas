@@ -12,7 +12,7 @@ export class SidebarComponent implements OnInit {
   constructor(private authService: AuthenticationService) { }
 
   ngOnInit(): void {
-    this.authService.getUser().subscribe(user => this.user = user)
+    this.authService.getUser().subscribe(user => this.user = user);
   }
 
 }
