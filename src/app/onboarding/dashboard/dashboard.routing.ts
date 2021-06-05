@@ -6,26 +6,19 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-    children: [
-      {
-        path: '',
-        redirectTo: 'portfolio',
-        pathMatch: 'full',
-      },
-      {
-        path: 'portfolio',
-        loadChildren: () => import('./portfolio/portfolio.module').then(m => m.PortfolioModule)
-      },
-      {
-        path: 'buy-gas',
-        loadChildren: () => import('./buy-gas/buy-gas.module').then(m => m.BuyGasModule)
-      },
-      {
-        path: 'cart',
-        loadChildren: () => import('./cart/cart.module').then(m => m.CartModule)
-      },
-    ]
-  }
+  },
+  {
+    path: 'portfolio',
+    loadChildren: () => import('./portfolio/portfolio.module').then(m => m.PortfolioModule)
+  },
+  {
+    path: 'buy-gas',
+    loadChildren: () => import('./buy-gas/buy-gas.module').then(m => m.BuyGasModule)
+  },
+  {
+    path: 'cart',
+    loadChildren: () => import('./cart/cart.module').then(m => m.CartModule)
+  },
 ];
 
 @NgModule({
