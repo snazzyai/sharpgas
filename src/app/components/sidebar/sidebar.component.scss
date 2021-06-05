@@ -14,8 +14,8 @@
   align-items: center;
 }
 .icon {
-  font-size: 20px;
-  padding: 5px;
+  font-size: 40px;
+
 }
 
 .icon-view {
@@ -24,6 +24,9 @@
 }
 .nav-item {
   color: grey;
+  &:hover {
+    cursor: pointer
+  }
 }
 .icon-color-purple {
   color: purple;
