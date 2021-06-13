@@ -1,3 +1,4 @@
+
 .user-dropdown {
   margin-right: 2rem;
   .user-text {
@@ -70,7 +71,110 @@
   }
 }
 
+.card-dash {
+  background: #fafafa;
+  padding: 2rem 0;
+  -webkit-box-shadow: -2px 4px 12px 0px rgba(0,0,0,0.65);
+  box-shadow: -2px 4px 12px 0px rgba(0,0,0,0.2);
+  border-radius: 20px;
+  border: none;
+  margin: 0 auto;
+
+  .heading{
+    padding-left: 1rem;
+    opacity: .7;
+  }
+
+}
+
+.m-auto{
+  margin: 0 auto;
+}
 .navbar {
   border-bottom-left-radius: 2rem;
   border-bottom-right-radius: 2rem;
+}
+.gas-cylinder{
+  margin: 0 auto;
+}
+.gas-detail{
+  font-size: 1rem;
+  font-weight: 400;
+  p {
+    font-weight: lighter;
+    padding: 5px 0px;
+  }
+}
+.recent-activities{
+  p{
+    padding: 15px;
+  }
+}
+.route{
+  text-decoration: none;
+
+}
+.top-cap{
+  width: 90px;
+  height: 10px;
+  background: black;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+.cap{
+  width: 20px;
+  height: 20px;
+  background: black;
+  margin: 0 auto
+}
+.top{
+  width: 80px;
+  height: 80px;
+  border: 5px solid #000;
+  border-radius: 10px;
+  margin: 0 auto;
+
+}
+.cylinder{
+  width: 180px;
+  height:250px;
+  background: #fff;
+  border: 5px solid #000;
+  border-radius: 60px;
+  overflow:hidden;
+  position: relative;
+  margin: 0 auto;
+
+  &:before{
+    content:"";
+    position:absolute;
+    top: 100px; //dynamic
+    width:400px;
+    height:400px;
+    background:#00acee;
+    left:50%;
+    transform:translateX(-50%);
+    border-radius:40%;
+    animation:fill 7s ease-in-out;
+
+  }
+}
+
+.base{
+  width: 180px;
+  height: 10px;
+  background: black;
+  border-radius: 20px;
+  margin: 0 auto;
+}
+
+@keyframes fill {
+  from {
+    top:250px;
+    transform:translateX(-50%) rotate(0deg);
+  }
+  to {
+    top: 100px; //dynamic
+    transform:translateX(-50%) rotate(360deg);
+  }
 }
